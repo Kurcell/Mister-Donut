@@ -17,7 +17,8 @@ public class PlateCounter extends BaseCounter {
         if(isInteractable()){
             g2.setColor(Color.RED);
             g.setFont(new Font("ComicSans", Font.ITALIC, 32));
-            g2.drawString("SERVE (R)",xPos + width/2 - 32,yPos -30);
+            g2.drawString("Serve (R)",xPos + width/2 - 32,yPos -42);
+            g2.drawString("Clear (C)",xPos + width/2 - 32,yPos -18);
 //            g.drawImage(item.sprite,50,30,null);
         }
     }

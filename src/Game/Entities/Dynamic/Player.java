@@ -1,6 +1,7 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.Static.*;
+import Game.GameStates.State;
 import Main.Handler;
 import Resources.Animation;
 import Resources.Images;
@@ -9,11 +10,13 @@ import Resources.Images;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 public class Player extends BaseDynamicEntity {
     Item item;
     float money;
-    int speed = 5;
+    DecimalFormat formatt = new DecimalFormat("#.00");
+    int speed = 10;
     private Burger burger;
     private String direction = "right";
     private int interactionCounter = 0;
@@ -31,6 +34,16 @@ public class Player extends BaseDynamicEntity {
 
     public void tick(){
         playerAnim.tick();
+        System.out.println(handler.getWidth());
+        System.out.println(handler.getHeight());
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+        	State.setState(handler.getGame().pauseState);
+        }
+        if (handler.getKeyManager().shiftButt) {
+        	speed = 4;
+        } else {
+        	speed = 10;
+        }
         if(xPos + width >= handler.getWidth()){
             direction = "left";
 
@@ -48,19 +61,28 @@ public class Player extends BaseDynamicEntity {
         } else {
             interactionCounter++;
         }
-        if(handler.getKeyManager().fattbut){
-            for(BaseCounter counter: handler.getWorld().Counters){
-                if (counter instanceof EmptyCounter && counter.isInteractable()){
-                    createBurger();
-                }
-            }
-        }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
-            for(BaseCounter counter: handler.getWorld().Counters) {
-                if (counter instanceof PlateCounter && counter.isInteractable()) {
-                    ringCustomer();
-                }
-            }
+        for(BaseCounter counter: handler.getWorld().Counters){
+          if (counter instanceof PlateCounter && counter.isInteractable()){
+        	  if (handler.getKeyManager().fattbut) {
+        		  createBurger();
+        	  }
+        	  if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)) {
+        		  ringCustomer();
+        	  }
+          }
+//        if(handler.getKeyManager().fattbut){
+//            for(BaseCounter counter: handler.getWorld().Counters){
+//                if (counter instanceof EmptyCounter && counter.isInteractable()){
+//                    createBurger();
+//                }
+//            }
+//        }
+//        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
+//            for(BaseCounter counter: handler.getWorld().Counters) {
+//                if (counter instanceof PlateCounter && counter.isInteractable()) {
+//                    ringCustomer();
+//                }
+            
         }
     }
 
@@ -69,7 +91,11 @@ public class Player extends BaseDynamicEntity {
         for(Client client: handler.getWorld().clients){
             boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
             if(matched){
-                money+=client.order.value;
+            	if(client.patience > client.OGpatience/2) {
+            		money+=client.order.value+ client.order.value*0.15;
+            	}else {
+            		money+=client.order.value;
+            	}
                 handler.getWorld().clients.remove(client);
                 handler.getPlayer().createBurger();
                 System.out.println("Total money earned is: " + String.valueOf(money));
@@ -88,11 +114,11 @@ public class Player extends BaseDynamicEntity {
         }
         g.setColor(Color.green);
         burger.render(g);
-        g.setColor(Color.green);
-        g.fillRect(handler.getWidth()/2 -210, 3, 320, 32);;
-        g.setColor(Color.yellow);
-        g.setFont(new Font("ComicSans", Font.BOLD, 32));
-        g.drawString("Money Earned: " + money, handler.getWidth()/2 -200, 30);
+//        g.setColor(Color.green);
+//        g.fillRect(handler.getWidth()/2-180, 3, 320, 32);;
+        g.setColor(Color.white);
+        g.setFont(new Font("ComicSans", Font.BOLD, 22));
+        g.drawString("Earnings: " + formatt.format(money), handler.getWidth()/2 -90, 60);
     }
 
     public void interact(){

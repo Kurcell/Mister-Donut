@@ -14,6 +14,7 @@ public class Item {
     }
 
     public static Item cheese = new Item(Images.ingredients[2], "cheese");
+    public static Item bacon = new Item(Images.ingredients[7], "bacon");
     public static Item lettuce = new Item(Images.ingredients[4], "lettuce");
     public static Item tomato = new Item(Images.ingredients[3], "tomato");
     public static Item burger = new Item(Images.tint(Images.ingredients[1],0.5f,0.5f,0.5f), "patty");

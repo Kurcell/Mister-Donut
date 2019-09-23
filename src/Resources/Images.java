@@ -15,6 +15,7 @@ public class Images {
     public static BufferedImage[] butstart;
     public static BufferedImage title;
     public static BufferedImage floor;
+    public static BufferedImage[] wall;
     public static BufferedImage welcome;
     public static BufferedImage Pause;
     public static BufferedImage[] Resume;
@@ -32,6 +33,7 @@ public class Images {
     public static SpriteSheet chefSpriteSheet;
     public Images() {
 
+    	wall = new BufferedImage[1];
         butstart = new BufferedImage[3];
         Resume = new BufferedImage[2];
         BTitle = new BufferedImage[2];
@@ -39,7 +41,7 @@ public class Images {
         kitchenChairTable = new BufferedImage[3];
         people = new BufferedImage[9];
         kitchenCounter = new BufferedImage[8];
-        ingredients = new BufferedImage[7];
+        ingredients = new BufferedImage[8];
         chef = new BufferedImage[4];
         try {
 
@@ -49,10 +51,11 @@ public class Images {
             chefSpriteSheet = new SpriteSheet(ImageIO.read(getClass().getResourceAsStream("/Sheets/chef.png")));
 
 
-            title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.jpg"));
+            title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.png"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
             welcome = ImageIO.read(getClass().getResourceAsStream("/Sheets/Welcome.png"));
-            floor = ImageIO.read(getClass().getResourceAsStream("/Sheets/floor.jpg"));
+            floor = ImageIO.read(getClass().getResourceAsStream("/Sheets/floor.png"));
+            wall[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/wall1.png"));
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
@@ -87,6 +90,7 @@ public class Images {
             ingredients[4] = burgerSpriteSheet.crop(161, 62, 117, 34); // lettuce
             ingredients[5] = burgerSpriteSheet.crop(444, 270, 115, 39); // bottom bun
             ingredients[6] = burgerSpriteSheet.crop(575, 263, 131, 51); // plate
+            ingredients[7] = burgerSpriteSheet.crop(161, 112, 110, 41); // bacon
 
             chef[0] = chefSpriteSheet.crop(30,3,66,120);
             chef[1] = chefSpriteSheet.crop(159,3,66,120);
