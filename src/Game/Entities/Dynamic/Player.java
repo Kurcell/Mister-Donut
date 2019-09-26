@@ -15,9 +15,13 @@ import java.text.DecimalFormat;
 public class Player extends BaseDynamicEntity {
     Item item;
     float money;
+    float tip;
     DecimalFormat formatt = new DecimalFormat("#.00");
     int speed = 10;
     private Burger burger;
+    public boolean wellDone = false;
+    public boolean gReview = false;
+    public boolean bReview = false;
     private String direction = "right";
     private int interactionCounter = 0;
     private Animation playerAnim;
@@ -34,11 +38,11 @@ public class Player extends BaseDynamicEntity {
 
     public void tick(){
         playerAnim.tick();
-        System.out.println(handler.getWidth());
-        System.out.println(handler.getHeight());
+        
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
         	State.setState(handler.getGame().pauseState);
         }
+        
         if (handler.getKeyManager().shiftButt) {
         	speed = 4;
         } else {
@@ -59,49 +63,46 @@ public class Player extends BaseDynamicEntity {
             interact();
             interactionCounter = 0;
         } else {
-            interactionCounter++;
+        	interactionCounter++;
         }
         for(BaseCounter counter: handler.getWorld().Counters){
-          if (counter instanceof PlateCounter && counter.isInteractable()){
-        	  if (handler.getKeyManager().fattbut) {
-        		  createBurger();
-        	  }
-        	  if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)) {
-        		  ringCustomer();
-        	  }
-          }
-//        if(handler.getKeyManager().fattbut){
-//            for(BaseCounter counter: handler.getWorld().Counters){
-//                if (counter instanceof EmptyCounter && counter.isInteractable()){
-//                    createBurger();
-//                }
-//            }
-//        }
-//        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)){
-//            for(BaseCounter counter: handler.getWorld().Counters) {
-//                if (counter instanceof PlateCounter && counter.isInteractable()) {
-//                    ringCustomer();
-//                }
-            
+        	if (counter instanceof PlateCounter && counter.isInteractable()){
+        		if (handler.getKeyManager().fattbut) {
+        			createBurger();
+        		}
+        		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)) {
+        			ringCustomer();
+        		}
+        	}
         }
     }
 
     private void ringCustomer() {
 
-        for(Client client: handler.getWorld().clients){
-            boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
-            if(matched){
-            	if(client.patience > client.OGpatience/2) {
-            		money+=client.order.value+ client.order.value*0.15;
-            	}else {
-            		money+=client.order.value;
+    	for(Client client: handler.getWorld().clients){
+    		boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
+    		if(matched){
+    			money+=client.order.value;
+    			if(client.patience > client.OGpatience/2) {
+    				money+=client.order.value*0.15;
+
+    			}
+    			if (client.inspector) {
+    				gReview = true;
+    				bReview = false;
+    				handler.getWorld().clients.forEach(clint -> clint.patience+=clint.patience*0.12);
+    			}
+            	if(wellDone) {
+            		money+=client.order.value*0.12;
+            		wellDone = false;
             	}
+
+            
                 handler.getWorld().clients.remove(client);
                 handler.getPlayer().createBurger();
                 System.out.println("Total money earned is: " + String.valueOf(money));
                 return;
             }
-
         }
     }
 

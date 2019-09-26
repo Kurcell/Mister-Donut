@@ -1,9 +1,12 @@
 package Main;
 
+import Game.Entities.Dynamic.Client;
 import Game.Entities.Dynamic.Player;
+
 import Game.Entities.Static.BaseCounter;
 import Game.Entities.Static.Burger;
 import Game.Entities.Static.EmptyCounter;
+import Game.Entities.Static.StoveCounter;
 import Game.World.BaseWorld;
 import Input.KeyManager;
 import Input.MouseManager;
@@ -28,9 +31,9 @@ public class Handler {
 
     private BaseWorld World;
 
-
-
+    
     private Player player;
+     
 
     public Handler(){
 
@@ -74,7 +77,7 @@ public class Handler {
     public Player getPlayer() {
         return player;
     }
-
+    
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -83,6 +86,14 @@ public class Handler {
         for (BaseCounter counter: getWorld().Counters){
             if(counter instanceof EmptyCounter){
                 return (EmptyCounter) counter;
+            }
+        }
+        return null;
+    }
+    public StoveCounter getStoveCounter(){
+        for (BaseCounter counter: getWorld().Counters){
+            if(counter instanceof StoveCounter){
+                return (StoveCounter) counter;
             }
         }
         return null;

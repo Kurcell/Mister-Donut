@@ -47,10 +47,11 @@ public class Restaurant_1 extends BaseWorld {
             }
         }
 
-
         for(Client client: this.clients){
-            client.tick();
+        	client.tick(); 
+        	
         }
+        
         for(BaseCounter counter: Counters){
             counter.tick();
         }
