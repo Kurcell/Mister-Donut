@@ -71,6 +71,10 @@ public class Client extends BaseDynamicEntity {
 
     public void tick(){
     	patience--;
+    	if(patience==0) {
+    		handler.getPlayer().gone++;
+    	}
+    	
 
     	for (int i = 0;i<handler.getWorld().clients.size();i++) { 
     		if (handler.getWorld().clients.get(i).antiV &&
@@ -95,6 +99,7 @@ public class Client extends BaseDynamicEntity {
     	}
 
     	if(patience<=0){
+    		
     		isLeaving=true;
     		if(inspector) {
     			handler.getPlayer().bReview = true;

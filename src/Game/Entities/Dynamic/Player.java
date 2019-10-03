@@ -14,10 +14,12 @@ import java.text.DecimalFormat;
 
 public class Player extends BaseDynamicEntity {
     Item item;
-    float money;
-    float tip;
-    DecimalFormat formatt = new DecimalFormat("#.00");
+    public float money;
+    int tip = 0;
+    public DecimalFormat formatt = new DecimalFormat("#.00");
     int speed = 10;
+    public int gone;
+    public int served;
     private Burger burger;
     public boolean wellDone = false;
     public boolean gReview = false;
@@ -38,6 +40,12 @@ public class Player extends BaseDynamicEntity {
 
     public void tick(){
         playerAnim.tick();
+        if(money>=50) {
+        	State.setState(handler.getGame().winState);
+        }
+        if(gone>=10) {
+        	State.setState(handler.getGame().loseState);
+        }
         
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
         	State.setState(handler.getGame().pauseState);
@@ -96,6 +104,7 @@ public class Player extends BaseDynamicEntity {
             		money+=client.order.value*0.12;
             		wellDone = false;
             	}
+            	served++;
 
             
                 handler.getWorld().clients.remove(client);
@@ -120,6 +129,7 @@ public class Player extends BaseDynamicEntity {
         g.setColor(Color.white);
         g.setFont(new Font("ComicSans", Font.BOLD, 22));
         g.drawString("Earnings: " + formatt.format(money), handler.getWidth()/2 -90, 60);
+        g.drawString("Served: " + served +"  Left: "+gone, handler.getWidth()/2 -90, 80);
     }
 
     public void interact(){
