@@ -6,6 +6,7 @@ import Game.Entities.Dynamic.Player;
 import Game.Entities.Static.BaseCounter;
 import Game.Entities.Static.Burger;
 import Game.Entities.Static.EmptyCounter;
+import Game.Entities.Static.RadioCounter;
 import Game.Entities.Static.StoveCounter;
 import Game.World.BaseWorld;
 import Input.KeyManager;
@@ -38,7 +39,7 @@ public class Handler {
     public Handler(){
 
         height= (DEFAULTHEIGHT/2) +(DEFAULTHEIGHT/4);
-        width = BaseCounter.DEFAULTCOUNTERWIDTH*8;
+        width = BaseCounter.DEFAULTCOUNTERWIDTH*9;
 
     }
 
@@ -94,6 +95,14 @@ public class Handler {
         for (BaseCounter counter: getWorld().Counters){
             if(counter instanceof StoveCounter){
                 return (StoveCounter) counter;
+            }
+        }
+        return null;
+    }
+    public RadioCounter getRadioCounter() {
+    	for (BaseCounter counter: getWorld().Counters){
+            if(counter instanceof RadioCounter){
+                return (RadioCounter) counter;
             }
         }
         return null;

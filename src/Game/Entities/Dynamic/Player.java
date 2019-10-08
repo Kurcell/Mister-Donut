@@ -11,15 +11,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
+import java.util.Random;
 
 public class Player extends BaseDynamicEntity {
     Item item;
     public float money;
-    int tip = 0;
     public DecimalFormat formatt = new DecimalFormat("#.00");
     int speed = 10;
     public int gone;
     public int served;
+    int radioTicks = 0;
     private Burger burger;
     public boolean wellDone = false;
     public boolean gReview = false;
@@ -40,6 +41,9 @@ public class Player extends BaseDynamicEntity {
 
     public void tick(){
         playerAnim.tick();
+        System.out.println("radio:" +radioTicks);
+        System.out.println("time:"+handler.getRadioCounter().timeWindow);
+        
         if(money>=50) {
         	State.setState(handler.getGame().winState);
         }
@@ -73,46 +77,88 @@ public class Player extends BaseDynamicEntity {
         } else {
         	interactionCounter++;
         }
+        if(handler.getRadioCounter().timeWindow!=0) {
+        	handler.getRadioCounter().timeWindow--;
+        }
+        if(radioTicks!=0) {
+        	radioTicks--;
+        }
+        if(radioTicks==1) {
+        	handler.getRadioCounter().timeWindow=2*60;
+        }
+        
         for(BaseCounter counter: handler.getWorld().Counters){
+        	if (counter instanceof RadioCounter && counter.isInteractable()){
+        		if(handler.getKeyManager().attbut) {
+        			radioTicks = new Random().nextInt(120*60);
+        			if(handler.getRadioCounter().timeWindow!=0){
+        				for(Client client : handler.getWorld().clients) {
+        					client.patience = client.OGpatience;
+        				}
+        			}
+        		}
+        	}
         	if (counter instanceof PlateCounter && counter.isInteractable()){
         		if (handler.getKeyManager().fattbut) {
         			createBurger();
         		}
         		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_R)) {
-        			ringCustomer();
+        			for(int i = 0; i<handler.getWorld().clients.size();i++) {
+        				ringCustomer(handler.getWorld().clients.get(i));
+        			}
+        		}
+        		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1) && handler.getWorld().clients.size()>0) {
+        			ringCustomer(handler.getWorld().clients.get(0));
+        		}
+        		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_2) && handler.getWorld().clients.size()>1) {
+        			ringCustomer(handler.getWorld().clients.get(1));
+        		}
+        		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_3) && handler.getWorld().clients.size()>2) {
+        			ringCustomer(handler.getWorld().clients.get(2));
+        		}
+        		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_4) && handler.getWorld().clients.size()>3) {
+        			ringCustomer(handler.getWorld().clients.get(3));
+        		}
+        		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_5) && handler.getWorld().clients.size()>4) {
+        			ringCustomer(handler.getWorld().clients.get(4));
         		}
         	}
         }
     }
 
-    private void ringCustomer() {
+    private void ringCustomer(Client client) {
 
-    	for(Client client: handler.getWorld().clients){
-    		boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
-    		if(matched){
-    			money+=client.order.value;
-    			if(client.patience > client.OGpatience/2) {
-    				money+=client.order.value*0.15;
+    	boolean matched = ((Burger)client.order.food).equals(handler.getCurrentBurger());
+    	if(matched){
+    		money+=client.order.value;
+    		if(client.patience > client.OGpatience/2) {
+    			money+=client.order.value*0.15;
 
-    			}
-    			if (client.inspector) {
-    				gReview = true;
-    				bReview = false;
-    				handler.getWorld().clients.forEach(clint -> clint.patience+=clint.patience*0.12);
-    			}
-            	if(wellDone) {
-            		money+=client.order.value*0.12;
-            		wellDone = false;
-            	}
-            	served++;
+    		}
+    		if (client.inspector) {
+    			gReview = true;
+    			bReview = false;
+    			handler.getWorld().clients.forEach(clint -> clint.patience+=clint.patience*0.12);
+    		}
+    		if(wellDone) {
+    			money+=client.order.value*0.12;
+    			wellDone = false;
+    		}
+    		for(Client customer : handler.getWorld().clients) {
+        		customer.patience += (customer.OGpatience)*(0.25);
+        		if(customer.patience>customer.OGpatience) {
+        			customer.patience = customer.OGpatience;
+        		}
+        	}
+    		served++;
 
-            
-                handler.getWorld().clients.remove(client);
-                handler.getPlayer().createBurger();
-                System.out.println("Total money earned is: " + String.valueOf(money));
-                return;
-            }
-        }
+
+    		handler.getWorld().clients.remove(client);
+    		handler.getPlayer().createBurger();
+    		System.out.println("Total money earned is: " + String.valueOf(money));
+    		return;
+
+    	}
     }
 
     public void render(Graphics g) {
