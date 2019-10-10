@@ -11,33 +11,33 @@ import java.util.ArrayList;
 
 public class BaseWorld {
 
-    public BufferedImage Background;
+	public BufferedImage Background;
 
-    public BaseCounter Counters[];
+	public BaseCounter Counters[];
 
-    public Handler handler;
+	public Handler handler;
 
-    public ArrayList<Client> clients = new ArrayList<>();
+	public ArrayList<Client> clients = new ArrayList<>();
 
-    public BaseWorld(BufferedImage Background, BaseCounter Counters[], Handler handler, Player player){
-        this.Background = Background;
-        this.Counters = Counters;
-        this.handler=handler;
-        handler.setWorld(this);
-        handler.setPlayer(player);
-    }
+	public BaseWorld(BufferedImage Background, BaseCounter Counters[], Handler handler, Player player){
+		this.Background = Background;
+		this.Counters = Counters;
+		this.handler=handler;
+		handler.setWorld(this);
+		handler.setPlayer(player);
+	}
 
-    public Client generateClient(){
-        Client client =  new Client(0,96,handler);
-        this.clients.add(client);
-        return client;
-    }
+	public Client generateClient(){
+		Client client =  new Client(0,96,handler);
+		this.clients.add(client);
+		return client;
+	}
 
-    public void tick(){
+	public void tick(){
 
-    }
+	}
 
-    public void render(Graphics g){
+	public void render(Graphics g){
 
-    }
+	}
 }

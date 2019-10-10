@@ -15,6 +15,7 @@ public class Images {
     public static BufferedImage[] butstart;
     public static BufferedImage title;
     public static BufferedImage floor;
+    public static BufferedImage radio;
     public static BufferedImage[] wall;
     public static BufferedImage welcome;
     public static BufferedImage Pause;
@@ -47,7 +48,7 @@ public class Images {
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
         people = new BufferedImage[10];
-        kitchenCounter = new BufferedImage[8];
+        kitchenCounter = new BufferedImage[9];
         ingredients = new BufferedImage[8];
         chef = new BufferedImage[4];
         try {
@@ -60,6 +61,7 @@ public class Images {
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/title.png"));
             Pause = ImageIO.read(getClass().getResourceAsStream("/Sheets/Pause.png"));
+            radio = ImageIO.read(getClass().getResourceAsStream("/Sheets/radio.png"));
             WinScreen = ImageIO.read(getClass().getResourceAsStream("/Sheets/WinScreen.png"));
             GameOver = ImageIO.read(getClass().getResourceAsStream("/Sheets/GameOver.png"));
             welcome = ImageIO.read(getClass().getResourceAsStream("/Sheets/Welcome.png"));
@@ -96,6 +98,7 @@ public class Images {
             kitchenCounter[5] = kitchenCounterSpriteSheet.crop(64,73,32,46);//cheese
             kitchenCounter[6] = kitchenCounterSpriteSheet.crop(0,133,32,50);//plates
             kitchenCounter[7] = kitchenCounterSpriteSheet.crop(0,63,34,56);//buns
+            kitchenCounter[8] = kitchenCounterSpriteSheet.crop(191,12,32,43);//bacon
 
             ingredients[0] = burgerSpriteSheet.crop(25, 16, 112, 43); // top bun
             ingredients[1] = burgerSpriteSheet.crop(30, 134, 103, 48); // patty
