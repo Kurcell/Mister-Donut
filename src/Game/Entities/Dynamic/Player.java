@@ -48,6 +48,12 @@ public class Player extends BaseDynamicEntity {
 		if(gone>=10) {
 			State.setState(handler.getGame().loseState);
 		}
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)) {
+			gone+=5;
+		}
+		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_I)) {
+			money+=25;
+		}
 
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
 			State.setState(handler.getGame().pauseState);

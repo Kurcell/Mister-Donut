@@ -47,7 +47,7 @@ public class Images {
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
         kitchenChairTable = new BufferedImage[3];
-        people = new BufferedImage[10];
+        people = new BufferedImage[14];
         kitchenCounter = new BufferedImage[9];
         ingredients = new BufferedImage[8];
         chef = new BufferedImage[4];
@@ -71,24 +71,30 @@ public class Images {
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
             Restart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/RestartNorm.png"));
-            Restart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/RestartClicked.png"));
+            Restart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/RestartHover.png"));
             Quit[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/QuitNorm.png"));
-            Quit[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/QuitClicked.png"));
+            Quit[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/QuitHover.png"));
 
             kitchenChairTable[0] = kitchenSpriteSheet.crop(21,27,62,54);
             kitchenChairTable[1] = kitchenSpriteSheet.crop(108,14,30,35);
             kitchenChairTable[2] = kitchenSpriteSheet.crop(108,52,30,35);
 
-            people[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Car_Designer3Female.png"));
-            people[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Doctor2Female.png"));
-            people[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Freedom_Fighter2Male.png"));
-            people[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Hipster.png"));
-            people[4] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Lawyer2Male.png"));
-            people[5] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Mad_Scientist3Female.png"));
-            people[6] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Programmer2Male.png"));
-            people[7] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Songwriter3Male.png"));
-            people[8] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Weather_Reporter2Female.png"));
-            people[9] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Inspector.png"));
+            people[0] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Araragi.png"));
+            people[1] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Hachikuji.png"));
+            people[2] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Hanekawa.png"));
+            people[3] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Senjougahara.png"));
+            people[4] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Sengoku.png"));
+            people[5] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Sengoku 2.png"));
+            people[6] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Shinobu Helmet.png"));
+            people[7] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Shinobu.png"));
+            people[8] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Kanbaru.png"));
+            people[9] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Kaiki.png"));
+            people[10] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Karen.png"));
+            people[11] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Tsukihi.png"));
+            people[12] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Kuchinawa.png"));
+            people[13] = ImageIO.read(getClass().getResourceAsStream("/Sheets/People/Ononoki.png"));
+
+
 
             kitchenCounter[0] = kitchenCounterSpriteSheet.crop(224,12,32,43);//stoveTop
             kitchenCounter[1] = kitchenCounterSpriteSheet.crop(96,76,32,43);//Vegetables

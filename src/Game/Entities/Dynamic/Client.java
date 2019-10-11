@@ -19,7 +19,7 @@ public class Client extends BaseDynamicEntity {
 	Order order;
 	public boolean isLeaving = false;
 	public Client(int xPos, int yPos, Handler handler) {
-		super(Images.people[new Random().nextInt(9)], xPos, yPos,64,72, handler);
+		super(Images.people[new Random().nextInt(14)], xPos+20, yPos,40,60, handler);
 
 		inspector = (new Random().nextInt(10)==0);
 		if(!inspector) { 
