@@ -44,6 +44,7 @@ public class MenuState extends State {
         g.setColor(Color.darkGray);
         g.fillRect(0,0,handler.getWidth(),handler.getHeight());
         g.drawImage(Images.title,0,0,handler.getWidth(),handler.getHeight(),null);
+        g.drawString("We don't sell donuts", 120, 340);
         uiManager.Render(g);
 
     }

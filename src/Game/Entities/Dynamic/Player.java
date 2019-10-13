@@ -41,18 +41,12 @@ public class Player extends BaseDynamicEntity {
 
 	public void tick(){
 		playerAnim.tick();
-		
+
 		if(money>=50) {
 			State.setState(handler.getGame().winState);
 		}
 		if(gone>=10) {
 			State.setState(handler.getGame().loseState);
-		}
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_O)) {
-			gone+=5;
-		}
-		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_I)) {
-			money+=25;
 		}
 
 		if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
@@ -64,15 +58,15 @@ public class Player extends BaseDynamicEntity {
 		} else {
 			speed = 10;
 		}
+		
 		if(xPos + width >= handler.getWidth()){
 			direction = "left";
-
 		} else if(xPos <= 0){
 			direction = "right";
 		}
 		if (direction.equals("right")){
 			xPos+=speed;
-		} else{
+		} else {
 			xPos-=speed;
 		}
 		if (interactionCounter > 15 && handler.getKeyManager().attbut){
@@ -84,6 +78,9 @@ public class Player extends BaseDynamicEntity {
 		if(handler.getRadioCounter().timeWindow!=0) {
 			handler.getRadioCounter().timeWindow--;
 		}
+		if(radioTicks==0) {
+			radioTicks = new Random().nextInt(9000) + 1000;
+		}
 		if(radioTicks!=0) {
 			radioTicks--;
 		}
@@ -94,7 +91,6 @@ public class Player extends BaseDynamicEntity {
 		for(BaseCounter counter: handler.getWorld().Counters){
 			if (counter instanceof RadioCounter && counter.isInteractable()){
 				if(handler.getKeyManager().attbut) {
-					radioTicks = new Random().nextInt(9000) + 1000;
 					if(handler.getRadioCounter().timeWindow!=0){
 						for(Client client : handler.getWorld().clients) {
 							client.patience = client.OGpatience;

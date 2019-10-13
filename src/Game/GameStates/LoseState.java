@@ -20,14 +20,14 @@ public class LoseState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIImageButton(100, 233, 180, 80, Images.Restart, () -> {
+        uiManager.addObjects(new UIImageButton(100, 280, 180, 80, Images.Restart, () -> {
             handler.getMouseManager().setUimanager(null);
             handler.getGame().reStart();
             State.setState(handler.getGame().gameState);
         }));
         
 
-        uiManager.addObjects(new UIImageButton(125, 233+(64+16), 128, 64, Images.Quit, () -> {
+        uiManager.addObjects(new UIImageButton(160, 300+(64+16), 128, 64, Images.Quit, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
@@ -61,9 +61,9 @@ public class LoseState extends State {
         
         g.setColor(Color.black);
         g.setFont(new Font("ComicSans", Font.BOLD, 32));
-        g.drawString("Earnings: " + handler.getPlayer().formatt.format(handler.getPlayer().money), handler.getWidth()/2 +143, 260);
-        g.drawString("Served: " + handler.getPlayer().served, handler.getWidth()/2 +143, 300);
-        g.drawString("Left: "+handler.getPlayer().gone, handler.getWidth()/2 +143, 340);
+        g.drawString("Earnings: " + handler.getPlayer().formatt.format(handler.getPlayer().money), handler.getWidth()/2 +80, 400);
+        g.drawString("Served: " + handler.getPlayer().served, handler.getWidth()/2 +140, 320);
+        g.drawString("Left: "+handler.getPlayer().gone, handler.getWidth()/2 +115, 360);
 
     }
 }

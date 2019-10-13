@@ -20,9 +20,12 @@ public class RadioCounter extends BaseCounter {
 
     @Override
     public void render(Graphics g){
-        g.drawImage(sprite,xPos,yPos,width,height,null);
-        if(timeWindow!=0) {
+        
+    	if(timeWindow!=0) {
         	g.drawImage(Images.tint(sprite,0,0,255),xPos,yPos,width,height,null);
+        }
+        else {
+        	g.drawImage(sprite,xPos,yPos,width,height,null);
         }
         g.drawImage(Images.radio,xPos+10,yPos-30,width-20,height-30,null);
     }

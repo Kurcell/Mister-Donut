@@ -1,13 +1,13 @@
 package Game.Entities.Dynamic;
 
 import Game.Entities.Static.Burger;
+
 import Game.Entities.Static.Item;
 import Game.Entities.Static.Order;
 import Main.Handler;
 import Resources.Images;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Client extends BaseDynamicEntity {
@@ -83,43 +83,43 @@ public class Client extends BaseDynamicEntity {
 		}
 
 		for (int i = 0;i<handler.getWorld().clients.size();i++) { // decreases the patience of a client in front or behind antiV randomly
-    		if (handler.getWorld().clients.get(i).antiV 
-    				&& handler.getWorld().clients.get(i).OGpatience != handler.getWorld().clients.get(i).patience &&
-    				((handler.getWorld().clients.get(i).OGpatience - handler.getWorld().clients.get(i).patience)
-    				% handler.getWorld().clients.get(i).eight==0)){
-    			if(!(i+1 < 0 || i+1 >= handler.getWorld().clients.size()) && !(i-1 < 0 || i-1 >= handler.getWorld().clients.size())) {
-    				if(new Random().nextInt(2)==0) {
-    					handler.getWorld().clients.get(i+1).patience-=(handler.getWorld().clients.get(i+1).patience*0.04);
-    				}
-    				else {
-    					handler.getWorld().clients.get(i-1).patience-=(handler.getWorld().clients.get(i-1).patience*0.04);
-    				}
-    			}
-    			if(!(i+1 < 0 || i+1 >= handler.getWorld().clients.size()) && (i-1 < 0 || i-1 >= handler.getWorld().clients.size())) {
-    					handler.getWorld().clients.get(i+1).patience-=(handler.getWorld().clients.get(i+1).patience*0.04);
-    					}
-    			if(!(i-1 < 0 || i-1 >= handler.getWorld().clients.size()) && (i+1 < 0 || i+1 >= handler.getWorld().clients.size())) {
+			if (handler.getWorld().clients.get(i).antiV 
+					&& handler.getWorld().clients.get(i).OGpatience != handler.getWorld().clients.get(i).patience &&
+					((handler.getWorld().clients.get(i).OGpatience - handler.getWorld().clients.get(i).patience)
+							% handler.getWorld().clients.get(i).eight==0)){
+				if(!(i+1 < 0 || i+1 >= handler.getWorld().clients.size()) && !(i-1 < 0 || i-1 >= handler.getWorld().clients.size())) {
+					if(new Random().nextInt(2)==0) {
+						handler.getWorld().clients.get(i+1).patience-=(handler.getWorld().clients.get(i+1).patience*0.04);
+					}
+					else {
+						handler.getWorld().clients.get(i-1).patience-=(handler.getWorld().clients.get(i-1).patience*0.04);
+					}
+				}
+				if(!(i+1 < 0 || i+1 >= handler.getWorld().clients.size()) && (i-1 < 0 || i-1 >= handler.getWorld().clients.size())) {
+					handler.getWorld().clients.get(i+1).patience-=(handler.getWorld().clients.get(i+1).patience*0.04);
+				}
+				if(!(i-1 < 0 || i-1 >= handler.getWorld().clients.size()) && (i+1 < 0 || i+1 >= handler.getWorld().clients.size())) {
 					handler.getWorld().clients.get(i-1).patience-=(handler.getWorld().clients.get(i-1).patience*0.04);
 				}
-    		}
-    	}
+			}
+		}
 	}
 
 	public void render(Graphics g){
 
 		if(!isLeaving){
 			g.setColor(Color.black); 
-			g.fillRect(xPos+16, yPos+76, 40, 4); // Creates empty health-bar
+			g.fillRect(xPos, yPos+76, 40, 4); // Creates empty health-bar
 			g.setColor(Color.green);
-			g.fillRect(xPos+16, yPos+76, patience/270, 4); // Fills in empty health-bar with a maximum of 10800/270 = 40
+			g.fillRect(xPos, yPos+76, patience/270, 4); // Fills in empty health-bar with a maximum of 10800/270 = 40
 			if (inspector) {
 				g.drawImage(Images.tint(Images.people[9],1.0f,((float)patience/(float)OGpatience),((float)patience/(float)OGpatience)),xPos,yPos,width,height,null);
 				g.setColor(Color.magenta);
-				g.drawString("Inspector", xPos+16, yPos+72);
+				g.drawString("Inspector", xPos, yPos+72);
 			}else if (antiV){ //testing
 				g.drawImage(Images.tint(Images.people[9],1.0f,((float)patience/(float)OGpatience),((float)patience/(float)OGpatience)),xPos,yPos,width,height,null);
 				g.setColor(Color.magenta);
-				g.drawString("Anti-V", xPos+16, yPos+72);
+				g.drawString("Anti-V", xPos, yPos+72);
 			}
 			else {
 				g.drawImage(Images.tint(sprite,1.0f,((float)patience/(float)OGpatience),((float)patience/(float)OGpatience)),xPos,yPos,width,height,null);

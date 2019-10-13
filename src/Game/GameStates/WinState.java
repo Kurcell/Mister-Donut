@@ -20,13 +20,13 @@ public class WinState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIImageButton(200, 223+(64+16), 180, 60, Images.Restart, () -> {
+        uiManager.addObjects(new UIImageButton(200, 333+(64+16), 180, 60, Images.Restart, () -> {
             handler.getMouseManager().setUimanager(null);
             handler.getGame().reStart();
             State.setState(handler.getGame().gameState);
         }));
 
-        uiManager.addObjects(new UIImageButton(510, 223+(64+16), 128, 64, Images.Quit, () -> {
+        uiManager.addObjects(new UIImageButton(510, 333+(64+16), 128, 64, Images.Quit, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
@@ -58,11 +58,11 @@ public class WinState extends State {
         g.drawImage(Images.WinScreen,0,0,handler.getWidth(),handler.getHeight(),null);
         uiManager.Render(g);
         
-        g.setColor(Color.white);
+        g.setColor(Color.orange);
         g.setFont(new Font("ComicSans", Font.BOLD, 22));
-        g.drawString("Earnings: " + handler.getPlayer().formatt.format(handler.getPlayer().money), handler.getWidth()/2 -70, 400);
-        g.drawString("Served: " + handler.getPlayer().served, handler.getWidth()/2 + 100, 400);
-        g.drawString("Left: "+handler.getPlayer().gone, handler.getWidth()/2 - 155, 400);
+        g.drawString("Earnings: " + handler.getPlayer().formatt.format(handler.getPlayer().money), handler.getWidth()/2 -90, 350);
+        g.drawString("Served: " + handler.getPlayer().served, handler.getWidth()/2 + 100, 350);
+        g.drawString("Left: "+handler.getPlayer().gone, handler.getWidth()/2 - 180, 350);
 
 
     }

@@ -20,25 +20,6 @@ public class PauseState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Resume, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().gameState);
-        }));
-
-        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.Options, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
-        }));
-
-        uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
-            handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
-        }));
-
-
-
-
-
     }
 
     @Override
@@ -61,6 +42,8 @@ public class PauseState extends State {
     @Override
     public void render(Graphics g) {
         g.drawImage(Images.Pause,0,0,handler.getWidth(),handler.getHeight(),null);
+        g.setColor(Color.white);
+        g.drawString("Press ESC to resume game",354,400);
         uiManager.Render(g);
 
     }
